@@ -2,7 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{{ title }}</title>
+    <style>
+        .claims-table {
+            border-collapse: collapse;
+            width: 100%;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+        .claims-table th, .claims-table td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        .claims-table th {
+            background-color: #f2f2f2;
+        }
+        .claims-table tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+    </style>
 </head>
 <body>
     <h1>{{ title }}</h1>
@@ -25,6 +45,20 @@
 
     <li><a href="{{ url_for('identity.logout') }}">Logout</a></li>
     </ul>
+
+    <h3>Token Claims</h3>
+    <table class="claims-table">
+        <tr>
+            <th>Claim</th>
+            <th>Value</th>
+        </tr>
+        {% for claim, value in user.items() %}
+        <tr>
+            <td>{{ claim }}</td>
+            <td>{{ value }}</td>
+        </tr>
+        {% endfor %}
+    </table>
 
     <hr>
     <footer style="text-align: right">{{ title }}</footer>
